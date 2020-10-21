@@ -1,0 +1,65 @@
+READ THIS WHOLE DOCUMENT FIRST! WE ARE FUCKED OTHERWISE. 
+
+
+MS1 Alpha: Roadmap
+
+Due: Thursday, 7/11
+
+Git project clone link: https://github.coecis.cornell.edu/mb2474/BattleCaml.git
+
+The end goal of this stage is to have a working infrastructure for the
+battleship game. This means that we should have a runnable terminal program
+which runs a "game loop". The loop does not have to be pretty, but must satisfy
+these basic conditions:
+
+1. It must wait for the user to input a "shot" into the board. The input can be
+in text format for now.
+2. It must give the user feedback on whether their shot hit a ship or not. 
+
+Obviously, in order to achieve No. 1, there must exist an internal
+representation of the game board: a 10x10 matrix which stores all of our ship
+and shot data. Thus, each entry of the matrix must be one of these four things:
+
+1. An empty space.
+2. A space that you already shot and missed in. 
+3. An undamaged ship.
+4. A damaged ship.
+
+For this first stage, we do not need the user to be able to make their own
+board. We will hardcode a starting board with ships already placed onto it, and
+let the user start with that. Thus, with this functionality, our project at the
+end of this stage will have two core files:
+
+1. gameboard.ml -- this will be the data structure definition of the game board,
+a 10x10 matrix. It should also define the types that the entries of the matrix
+can be, as listed above. It should have a rep_ok function (which may not do too
+much right now). It must also have functions that return true or false given a
+coordinate (say, B4) that indicate whether there is an undamaged ship at that
+location. It must also have functions to change the values of entries at
+particular coordinates, such as "change the value at B4 from undamaged ship to
+damaged ship". It will also eventually have a format function which draws it to
+the screen, but we omit that for now. There should be a test suite that passes,
+testing each function. 
+
+2. gameloop.ml -- this will be the main game loop of our function. It will be
+the entry point for our game, and must run when we launch the program. It must
+have functions to parse input (similar to A3-Adventure), which parse just one
+command for now:
+	Fire of coord
+Where "Fire" is the command to fire, and "coord" is the data type which
+represents the coordinates of a single entry in the matrix. It must communicate
+with the gameboard data type to understand whether the command a user entered is
+legal, or illegal (if the command is malformed, or if you try to fire at an
+already damaged ship entry). It must give verbal feedback for each command the
+user enters, and must then wait for input again (hence the loop). There must be
+tests for these methods as well.
+
+Since there are only two files that are dealing with, Alex and Brandon should
+each take one file of the program--which one you each take does not matter. I
+mocked up both files an hour ago (for our demo which we already failed since I
+finished the demo, and then corrupted everything while compiling...) and
+together they took me about 1.5 hours. In the meantime, I will work on defining
+work for the next stages of our project, getting the compilation process and
+makefile working, and developing the graphical interface which will be needed
+in the next sprint. I will also write the report which we need in our
+submission on Thursday.
